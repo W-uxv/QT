@@ -27,6 +27,7 @@ public:
     QStack<QString> operands;
     QStack<QString> opcodes;
     QMap<int,QPushButton*> btnNums;
+    QMap<int,QPushButton*> btnOps;
 
     QString calculation(bool *ok=NULL);
 

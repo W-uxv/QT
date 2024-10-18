@@ -20,14 +20,17 @@ MainWindow::MainWindow(QWidget *parent)
         {Qt::Key_8,ui->btnNum8},
         {Qt::Key_9,ui->btnNum9}
     };
+    btnOps = {
+        {Qt::Key_Plus,ui->btnPlus},
+        {Qt::Key_Asterisk,ui->btnMultiple},
+        {Qt::Key_Minus,ui->btnMinus},
+        {Qt::Key_Slash,ui->btnDivide}
+    };
 
     foreach (auto btn, btnNums)
         connect(btn,SIGNAL(clicked()),this,SLOT(btnNumClicked()));
-
-    connect(ui->btnPlus,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    connect(ui->btnMultiple,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    connect(ui->btnMinus,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    connect(ui->btnDivide,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
+    foreach (auto btn, btnOps)
+        connect(btn,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
 
     connect(ui->btnPercentage,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
     connect(ui->btnInverse,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
@@ -148,6 +151,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     foreach(auto btnKey, btnNums.keys()) {
         if(event->key() == btnKey)
             btnNums[btnKey]->animateClick();
+    }
+    foreach(auto btnKey, btnOps.keys()) {
+        if(event->key() == btnKey)
+            btnOps[btnKey]->animateClick();
     }
 }
 
